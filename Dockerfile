@@ -1,6 +1,11 @@
-from php:7.4-apache
+FROM php:apache
 
-RUN apt update
-RUN apt install --yes imagemagick
+RUN apt update && \
+    apt install -y  \
+    imagemagick \
+    && \
+    rm -rf /var/lib/{apt,dpkg,cache,log}/
+
+RUN docker-php-ext-install mysqli
 
 COPY . /var/www/html/
