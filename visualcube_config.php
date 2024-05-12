@@ -44,5 +44,5 @@
 	$DB_USERNAME=getenv("DB_USERNAME");
 	$DB_PASSWORD=getenv("DB_PASSWORD");
 	// Maximum size of image to be cached
-	$CACHE_IMG_SIZE_LIMIT = 1000000; // 10Kb
+	$CACHE_IMG_SIZE_LIMIT = 1000000; // 1Mb
 
