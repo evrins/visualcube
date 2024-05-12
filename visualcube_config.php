@@ -37,12 +37,12 @@
 
 	// Whether image caching is enabled. NOTE: if enabled a cron
 	// job will need to be set up to prune the database
-	$ENABLE_CACHE = false;
+	$ENABLE_CACHE = getenv("ENABLE_CACHE") != "false";
 	// Database Configuration (for image caching)
-	$DB_HOST="localhost";
-	$DB_NAME="DATABASE_NAME";
-	$DB_USERNAME="DATABASE_USERNAME";
-	$DB_PASSWORD="DATABASE_PASSWORD";
+	$DB_HOST=getenv("DB_HOST");
+	$DB_NAME=getenv("DB_NAME");
+	$DB_USERNAME=getenv("DB_USERNAME");
+	$DB_PASSWORD=getenv("DB_PASSWORD");
 	// Maximum size of image to be cached
-	$CACHE_IMG_SIZE_LIMIT = 10000; // 10Kb
+	$CACHE_IMG_SIZE_LIMIT = 1000000; // 10Kb
 
