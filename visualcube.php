@@ -487,16 +487,16 @@
 		// ---------------[ 3D Cube Generator properties ]---------------
 
 		// Outline width
-		$OUTLINE_WIDTH = 0.94;
+		$OUTLINE_WIDTH = 0.94 * 100;
 
 		// Stroke width
 		$sw = 0;
 
 		// Viewport
-		$ox = -0.9;
-		$oy = -0.9;
-		$vw = 1.8;
-		$vh = 1.8;
+		$ox = -0.9 * 100;
+		$oy = -0.9 * 100;
+		$vw = 1.8 * 100;
+		$vh = 1.8 * 100;
 
 		// ------------------[ 3D Cube Generator ]-----------------------
 
@@ -559,8 +559,8 @@
 	width='$size' height='$size'
 	viewBox='$ox $oy $vw $vh'>\n";
 
-	// Draw background
-	if($bg) $cube .= "\t<rect fill='#$bg' x='$ox' y='$oy' width='$vw' height='$vh'/>\n";
+		// Draw background
+		if($bg) $cube .= "\t<rect fill='#$bg' x='$ox' y='$oy' width='$vw' height='$vh'/>\n";
 
 		// Transparancy background rendering
 		if($co < 100){
@@ -572,14 +572,14 @@
 			$cube .= "\t</g>\n";
 
 			// Create outline for each background face (transparency only)
-			$cube .= "\t<g style='stroke-width:0.1;stroke-linejoin:round;opacity:".($co/100)."'>\n";
+			$cube .= "\t<g style='stroke-width:10;stroke-linejoin:round;opacity:".($co/100)."'>\n";
 			for($ri = 0; $ri < 3; $ri++)
 				$cube .= outline_svg($ro[$ri]);
 			$cube .= "\t</g>\n";
 		}
 
 		// Create outline for each visible face
-		$cube .= "\t<g style='stroke-width:0.1;stroke-linejoin:round;opacity:".($co/100)."'>\n";
+		$cube .= "\t<g style='stroke-width:10;stroke-linejoin:round;opacity:".($co/100)."'>\n";
 		for($ri = 3; $ri < 6; $ri++){
 			if(face_visible($ro[$ri], $rv) || $co < 100)
 				$cube .= outline_svg($ro[$ri]);
@@ -605,7 +605,7 @@
 
 		// Draw Arrows
 		if(isset($arrows)){
-			$awidth = 0.12 / $dim;
+			$awidth = 12 / $dim;
 			$cube .= "\t<g style='opacity:1;stroke-opacity:1;stroke-width:$awidth;stroke-linecap:round'>\n";
 			foreach($arrows as $i => $a){
 				$cube .= gen_arrow($i, $a[0], $a[1], $a[2], $a[4], array_key_exists(3, $a)?$a[3]:$ac);
@@ -613,11 +613,11 @@
 			$cube .= "\t</g>\n";
 		}
 
-		$cube .= "</svg>\n";
+		$cube .= "</svg>";
 
 
 
-
+		
 
 		// Display cube
 		if($DEBUG) echo $cube;
@@ -834,10 +834,10 @@
 		return "\t\t<polygon fill='#".
 			($fcol == 't' ? '000000' : $fcol)."' stroke='#$cc' ".
 			($fcol == 't' ? "opacity='0' " : ' ' )."points='".
-				$p1[0].','.$p1[1].' '.
-				$p2[0].','.$p2[1].' '.
-				$p3[0].','.$p3[1].' '.
-				$p4[0].','.$p4[1]."'/>\n";
+				($p1[0] * 100).','.($p1[1] * 100).' '.
+				($p2[0] * 100).','.($p2[1] * 100).' '.
+				($p3[0] * 100).','.($p3[1] * 100).' '.
+				($p4[0] * 100).','.($p4[1] * 100)."'/>\n";
 	}
 
 	// Generates svg for an arrow pointing from sticker s1 to s2
@@ -867,10 +867,10 @@
 			$rt = rad2deg(atan(($p2[1]-($p_[1]))/($p2[0]-$p_[0])));
 			$rt = ($p_[0] > $p2[0]) ? $rt + 180 : $rt;
 		}
-		return '		<path d="M '.$p1[0].','.$p1[1].' '.(isset($pv)?'Q '.$pv[0].','.$pv[1]:'L').' '.$p2[0].','.$p2[1].'"
+		return '		<path d="M '.($p1[0] * 100).','.($p1[1] * 100).' '.(isset($pv)?'Q '.$pv[0].','.$pv[1]:'L').' '.($p2[0] * 100).','.($p2[1] * 100).'"
 			style="fill:none;stroke:#'.$col.';stroke-opacity:1" />
-		<path transform=" translate('.$p2[0].','.$p2[1].') scale('.(0.033 / $dim).') rotate('.$rt.')"
-			d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z"
+		<path transform=" translate('.($p2[0] * 100).','.($p2[1] * 100).') scale('.(0.033 / $dim).') rotate('.$rt.')"
+			d="M 577,0.0 L -288,500 L -288,-500 L 577,0.0 z"
 			style="fill:#'.$col.';stroke-width:0;stroke-linejoin:round"/>'."\n";
 	}
 
